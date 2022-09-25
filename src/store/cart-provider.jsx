@@ -58,6 +58,8 @@ const cartRecuder = (state, action) => {
         items: updatedState,
         totalAmount: updatedTotalAmount,
       };
+    case 'CLEAR':
+      return defaultCartState;
 
     default:
       return defaultCartState;
@@ -78,11 +80,16 @@ const CartProvider = (props) => {
     dispatchCart({ type: 'REMOVE', payload: id });
   };
 
+  const cartClearHandler = () => {
+    dispatchCart({ type: 'CLEAR' });
+  };
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCart,
     removeItem: removeItemFromCart,
+    clearCart: cartClearHandler,
   };
 
   return (
